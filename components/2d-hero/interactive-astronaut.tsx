@@ -68,18 +68,23 @@ export function InteractiveAstronaut({
       className="relative w-full h-full flex items-center justify-center"
       style={{ perspective: '1200px' }}
     >
-      {/* Glow effects for orange rings - positioned behind astronaut */}
+      {/* Glow effects for orange rings - positioned to match the astronaut's suit */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         {/* Left wrist glow */}
         <motion.div
-          className="absolute w-16 h-16 rounded-full bg-orange-500/40 blur-xl"
+          className="absolute w-20 h-20 rounded-full bg-orange-500/50 blur-xl"
           style={{
-            top: '52%',
-            left: '28%',
+            top: '38%',
+            left: '22%',
           }}
           animate={{
-            opacity: [0.4, 0.8, 0.4],
-            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.7, 0.3],
+            scale: [1, 1.4, 1],
+            boxShadow: [
+              '0 0 20px rgba(249, 115, 22, 0.4)',
+              '0 0 40px rgba(249, 115, 22, 0.7)',
+              '0 0 20px rgba(249, 115, 22, 0.4)',
+            ],
           }}
           transition={{
             duration: 2,
@@ -89,14 +94,19 @@ export function InteractiveAstronaut({
         />
         {/* Right wrist glow */}
         <motion.div
-          className="absolute w-16 h-16 rounded-full bg-orange-500/40 blur-xl"
+          className="absolute w-20 h-20 rounded-full bg-orange-500/50 blur-xl"
           style={{
-            top: '52%',
-            right: '28%',
+            top: '38%',
+            right: '22%',
           }}
           animate={{
-            opacity: [0.4, 0.8, 0.4],
-            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.7, 0.3],
+            scale: [1, 1.4, 1],
+            boxShadow: [
+              '0 0 20px rgba(249, 115, 22, 0.4)',
+              '0 0 40px rgba(249, 115, 22, 0.7)',
+              '0 0 20px rgba(249, 115, 22, 0.4)',
+            ],
           }}
           transition={{
             duration: 2,
@@ -105,16 +115,21 @@ export function InteractiveAstronaut({
             delay: 0.3,
           }}
         />
-        {/* Left leg glow */}
+        {/* Left knee glow */}
         <motion.div
-          className="absolute w-14 h-14 rounded-full bg-orange-500/30 blur-lg"
+          className="absolute w-16 h-16 rounded-full bg-orange-500/40 blur-xl"
           style={{
-            bottom: '18%',
-            left: '35%',
+            bottom: '28%',
+            left: '32%',
           }}
           animate={{
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.2, 1],
+            opacity: [0.25, 0.55, 0.25],
+            scale: [1, 1.3, 1],
+            boxShadow: [
+              '0 0 15px rgba(249, 115, 22, 0.3)',
+              '0 0 30px rgba(249, 115, 22, 0.5)',
+              '0 0 15px rgba(249, 115, 22, 0.3)',
+            ],
           }}
           transition={{
             duration: 2.5,
@@ -123,22 +138,63 @@ export function InteractiveAstronaut({
             delay: 0.5,
           }}
         />
-        {/* Right leg glow */}
+        {/* Right knee glow */}
         <motion.div
-          className="absolute w-14 h-14 rounded-full bg-orange-500/30 blur-lg"
+          className="absolute w-16 h-16 rounded-full bg-orange-500/40 blur-xl"
           style={{
-            bottom: '18%',
-            right: '35%',
+            bottom: '28%',
+            right: '32%',
           }}
           animate={{
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.2, 1],
+            opacity: [0.25, 0.55, 0.25],
+            scale: [1, 1.3, 1],
+            boxShadow: [
+              '0 0 15px rgba(249, 115, 22, 0.3)',
+              '0 0 30px rgba(249, 115, 22, 0.5)',
+              '0 0 15px rgba(249, 115, 22, 0.3)',
+            ],
           }}
           transition={{
             duration: 2.5,
             repeat: Infinity,
             ease: 'easeInOut',
             delay: 0.8,
+          }}
+        />
+        {/* Left ankle glow */}
+        <motion.div
+          className="absolute w-14 h-14 rounded-full bg-orange-500/35 blur-lg"
+          style={{
+            bottom: '8%',
+            left: '35%',
+          }}
+          animate={{
+            opacity: [0.2, 0.5, 0.2],
+            scale: [1, 1.25, 1],
+          }}
+          transition={{
+            duration: 2.2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+        />
+        {/* Right ankle glow */}
+        <motion.div
+          className="absolute w-14 h-14 rounded-full bg-orange-500/35 blur-lg"
+          style={{
+            bottom: '8%',
+            right: '35%',
+          }}
+          animate={{
+            opacity: [0.2, 0.5, 0.2],
+            scale: [1, 1.25, 1],
+          }}
+          transition={{
+            duration: 2.2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1.2,
           }}
         />
       </div>
