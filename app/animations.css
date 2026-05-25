@@ -1,0 +1,207 @@
+/* Advanced Space Animations */
+
+@keyframes rotateThreeD {
+  0% { 
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); 
+  }
+  100% { 
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg); 
+  }
+}
+
+@keyframes floatThreeD {
+  0%, 100% { 
+    transform: translateY(0px) translateZ(0px); 
+  }
+  50% { 
+    transform: translateY(-30px) translateZ(50px); 
+  }
+}
+
+@keyframes hologram-flicker {
+  0%, 100% { 
+    opacity: 1; 
+    filter: drop-shadow(0 0 20px rgba(56, 189, 248, 1)); 
+  }
+  50% { 
+    opacity: 0.8; 
+    filter: drop-shadow(0 0 30px rgba(168, 85, 247, 1)); 
+  }
+}
+
+@keyframes space-warp {
+  0% { 
+    transform: perspective(1000px) rotateX(0deg) rotateY(-10deg) rotateZ(0deg) scale(0.8); 
+  }
+  50% { 
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) rotateZ(0deg) scale(1); 
+  }
+  100% { 
+    transform: perspective(1000px) rotateX(0deg) rotateY(-10deg) rotateZ(0deg) scale(0.8); 
+  }
+}
+
+@keyframes stellar-burst {
+  0% { 
+    transform: scale(0) rotate(0deg); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1) rotate(360deg); 
+    opacity: 0; 
+  }
+}
+
+@keyframes planet-orbit {
+  0% { 
+    transform: translate(0, 0) rotate(0deg); 
+  }
+  100% { 
+    transform: translate(100px, 0) rotate(360deg); 
+  }
+}
+
+@keyframes gradient-shift {
+  0% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 0% 50%; 
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.3; 
+  }
+  50% { 
+    opacity: 1; 
+  }
+}
+
+/* Animation utility classes */
+.animate-3d-rotate {
+  animation: rotateThreeD 10s linear infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.animate-3d-float {
+  animation: floatThreeD 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+.animate-hologram {
+  animation: hologram-flicker 2.5s ease-in-out infinite;
+  backface-visibility: hidden;
+}
+
+.animate-space-warp {
+  animation: space-warp 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.animate-stellar-burst {
+  animation: stellar-burst 2s ease-out forwards;
+}
+
+.animate-planet-orbit {
+  animation: planet-orbit 20s linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* 3D perspective utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Futuristic glassmorphism */
+.glass-premium {
+  background: rgba(7, 9, 19, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 
+    0 8px 32px 0 rgba(56, 189, 248, 0.1),
+    inset 0 0 1px rgba(168, 85, 247, 0.2);
+}
+
+.glass-premium:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+  box-shadow: 
+    0 8px 32px 0 rgba(56, 189, 248, 0.2),
+    inset 0 0 1px rgba(168, 85, 247, 0.4);
+}
+
+/* Neon border effect */
+.border-neon {
+  border: 2px solid transparent;
+  background: linear-gradient(rgba(7, 9, 19, 0.8), rgba(7, 9, 19, 0.8)) padding-box,
+              linear-gradient(135deg, #38bdf8, #a855f7) border-box;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3), inset 0 0 20px rgba(56, 189, 248, 0.05);
+}
+
+/* Holographic text effect */
+.holographic-text {
+  background: linear-gradient(135deg, #38bdf8, #a855f7, #38bdf8);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Cosmic radial gradient */
+.cosmic-bg {
+  background: radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
+}
+
+/* Starfield effect */
+.starfield {
+  position: relative;
+  overflow: hidden;
+}
+
+.starfield::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow: 
+    100px 100px white, 200px 200px white, 300px 50px white,
+    150px 300px white, 400px 100px white;
+  animation: twinkle 3s infinite;
+}
+
+/* Glow on focus/hover for interactive elements */
+.glow-interactive {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, box-shadow;
+}
+
+.glow-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(56, 189, 248, 0.3);
+}
+
+.glow-interactive:focus {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+}
