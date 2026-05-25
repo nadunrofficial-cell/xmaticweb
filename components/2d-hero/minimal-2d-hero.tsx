@@ -15,18 +15,19 @@ export function Minimal2DHero() {
   // Generate random blinking circles
   const blinkingCircles = useMemo(() => {
     const circles = []
+    const isSmallScreen = windowSize.width < 1024
     for (let i = 0; i < 8; i++) {
       circles.push({
         id: i,
         top: Math.random() * 80 + 10,
         left: Math.random() * 80 + 10,
-        size: Math.random() * 40 + 15,
+        size: isSmallScreen ? Math.random() * 20 + 5 : Math.random() * 40 + 15,
         duration: Math.random() * 4 + 3,
         delay: Math.random() * 2,
       })
     }
     return circles
-  }, [])
+  }, [windowSize.width])
 
   useEffect(() => {
     // Set initial window size
@@ -115,10 +116,10 @@ export function Minimal2DHero() {
       <Starfield mouseX={mousePosition.x} mouseY={mousePosition.y} />
 
       {/* Main content */}
-      <div className="relative z-10 h-screen grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 min-h-screen flex flex-col lg:grid lg:grid-cols-2 gap-8 items-center justify-center px-6 sm:px-8 lg:px-12 py-20 lg:py-0">
         {/* Left side - Typography and CTA */}
         <motion.div
-          className="flex flex-col justify-center space-y-6 sm:space-y-8"
+          className="flex flex-col justify-center space-y-6 sm:space-y-8 order-1"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -175,7 +176,7 @@ export function Minimal2DHero() {
             {[
               { value: '500+', label: 'Projects Launched' },
               { value: '150+', label: 'Happy Clients' },
-              { value: '10+', label: 'Years Experience' },
+              { value: '6+', label: 'Years Experience' },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-xl sm:text-2xl font-bold text-[#38bdf8]">{stat.value}</span>
@@ -186,6 +187,24 @@ export function Minimal2DHero() {
         </motion.div>
 
         {/* Right side - Astronaut and Earth Image with Mouse Parallax */}
+        <motion.div
+          className="relative w-full h-auto lg:h-full flex items-center justify-center order-2 lg:order-none lg:hidden"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <div className="relative w-full max-w-sm aspect-square">
+            <Image
+              src="/astronaut-earth.png"
+              alt="Astronaut floating in space with Earth"
+              fill
+              className="object-contain drop-shadow-2xl"
+              priority
+            />
+          </div>
+        </motion.div>
+
+        {/* Right side - Astronaut and Earth Image with Mouse Parallax (Desktop) */}
         <motion.div
           className="hidden lg:flex relative w-full h-full items-center justify-center"
           initial={{ opacity: 0, scale: 0.9 }}
