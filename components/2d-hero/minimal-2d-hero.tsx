@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState, useMemo } from 'react'
 import { Starfield } from './starfield'
+import { InteractiveAstronaut } from './interactive-astronaut'
 
 export function Minimal2DHero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -15,18 +16,19 @@ export function Minimal2DHero() {
   // Generate random blinking circles
   const blinkingCircles = useMemo(() => {
     const circles = []
+    const isSmallScreen = windowSize.width < 1024
     for (let i = 0; i < 8; i++) {
       circles.push({
         id: i,
         top: Math.random() * 80 + 10,
         left: Math.random() * 80 + 10,
-        size: Math.random() * 40 + 15,
+        size: isSmallScreen ? Math.random() * 20 + 5 : Math.random() * 40 + 15,
         duration: Math.random() * 4 + 3,
         delay: Math.random() * 2,
       })
     }
     return circles
-  }, [])
+  }, [windowSize.width])
 
   useEffect(() => {
     // Set initial window size
@@ -115,10 +117,10 @@ export function Minimal2DHero() {
       <Starfield mouseX={mousePosition.x} mouseY={mousePosition.y} />
 
       {/* Main content */}
-      <div className="relative z-10 h-screen grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 min-h-screen flex flex-col lg:grid lg:grid-cols-2 gap-8 items-center justify-center px-6 sm:px-8 lg:px-12 py-20 lg:py-0">
         {/* Left side - Typography and CTA */}
         <motion.div
-          className="flex flex-col justify-center space-y-6 sm:space-y-8"
+          className="flex flex-col justify-center space-y-6 sm:space-y-8 order-1"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -175,7 +177,7 @@ export function Minimal2DHero() {
             {[
               { value: '500+', label: 'Projects Launched' },
               { value: '150+', label: 'Happy Clients' },
-              { value: '10+', label: 'Years Experience' },
+              { value: '6+', label: 'Years Experience' },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-xl sm:text-2xl font-bold text-[#38bdf8]">{stat.value}</span>
@@ -185,39 +187,37 @@ export function Minimal2DHero() {
           </motion.div>
         </motion.div>
 
-        {/* Right side - Astronaut and Earth Image with Mouse Parallax */}
+        {/* Mobile - Interactive Astronaut */}
+        <motion.div
+          className="relative w-full h-auto flex items-center justify-center order-2 lg:hidden"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <div className="relative w-full max-w-xs h-[350px]">
+            <Image
+              src="/astronaut-laptop.png"
+              alt="Futuristic astronaut with laptop"
+              fill
+              className="object-contain drop-shadow-2xl"
+              priority
+            />
+          </div>
+        </motion.div>
+
+        {/* Desktop - Interactive Astronaut with Full Effects */}
         <motion.div
           className="hidden lg:flex relative w-full h-full items-center justify-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <motion.div 
-            className="relative w-full max-w-2xl aspect-square"
-            animate={{
-              x: (mousePosition.x / windowSize.width - 0.5) * 30,
-              y: (mousePosition.y / windowSize.height - 0.5) * 30,
-              rotateX: (mousePosition.y / windowSize.height - 0.5) * 8,
-              rotateY: (mousePosition.x / windowSize.width - 0.5) * 8,
-            }}
-            transition={{
-              type: 'spring',
-              stiffness: 100,
-              damping: 25,
-            }}
-            style={{
-              perspective: 1200,
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            <Image
-              src="/astronaut-earth.png"
-              alt="Astronaut floating in space with Earth"
-              fill
-              className="object-contain drop-shadow-2xl"
-              priority
-            />
-          </motion.div>
+          <InteractiveAstronaut
+            mouseX={mousePosition.x}
+            mouseY={mousePosition.y}
+            windowWidth={windowSize.width}
+            windowHeight={windowSize.height}
+          />
         </motion.div>
       </div>
 
