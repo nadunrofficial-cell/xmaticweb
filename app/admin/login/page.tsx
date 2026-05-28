@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { StarField } from "@/components/star-field"
 
 // Simple password - change this to your desired password
-const ADMIN_PASSWORD = "xmatic2024"
+const ADMIN_PASSWORD = "Ab@12345"
 
 export default function AdminLoginPage() {
   const router = useRouter()

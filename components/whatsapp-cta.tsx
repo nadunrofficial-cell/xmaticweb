@@ -6,7 +6,7 @@ import { MessageCircle } from "lucide-react"
 export function WhatsAppCTA() {
   return (
     <motion.a
-      href="https://wa.me/94771234567?text=Hi%20Xmatic%20Digital!%20I'm%20interested%20in%20your%20services."
+      href="https://wa.me/940760755805?text=Hi%20Xmatic%20Digital!%20I'm%20interested%20in%20your%20services."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform group"

@@ -3,10 +3,41 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Calendar, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Astronaut } from '@/components/astronaut'
+import { InteractiveAstronaut } from '@/components/2d-hero/interactive-astronaut'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
 export function CTASection() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [windowSize, setWindowSize] = useState({ width: 1024, height: 768 })
+
+  useEffect(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      })
+    }
+
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Animated background elements */}
@@ -39,7 +70,7 @@ export function CTASection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Left - Astronaut */}
+          {/* Left - Interactive Astronaut */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -47,7 +78,12 @@ export function CTASection() {
             transition={{ duration: 0.8 }}
             className="hidden lg:flex justify-center"
           >
-            <Astronaut size="lg" variant="thinking" />
+            <InteractiveAstronaut
+              mouseX={mousePosition.x}
+              mouseY={mousePosition.y}
+              windowWidth={windowSize.width}
+              windowHeight={windowSize.height}
+            />
           </motion.div>
 
           {/* Right - Content */}
@@ -109,10 +145,10 @@ export function CTASection() {
                   <Button
                     asChild
                     size="lg"
-                    className="border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10 px-8 py-6 text-lg rounded-full font-semibold"
+                    className="border-[#25D366] text-white bg-[#25D366] hover:bg-[#25D366]/90 px-8 py-6 text-lg rounded-full font-semibold"
                   >
                     <a
-                      href="https://wa.me/94771234567?text=Hi%20Xmatic%20Digital!%20I'm%20interested%20in%20your%20services."
+                      href="https://wa.me/940760755805?text=Hi%20Xmatic%20Digital!%20I'm%20interested%20in%20your%20services."
                       target="_blank"
                       rel="noopener noreferrer"
                     >

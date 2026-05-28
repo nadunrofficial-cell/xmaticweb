@@ -190,9 +190,9 @@ export function ProcessSection() {
 
                 <motion.div className="space-y-4">
                   {[
-                    { icon: '🚀', label: 'Expert navigation' },
-                    { icon: '🛰️', label: 'Real-time monitoring' },
-                    { icon: '⭐', label: 'Course correction' },
+                    { label: 'Expert navigation' },
+                    { label: 'Real-time monitoring' },
+                    { label: 'Course correction' },
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -200,7 +200,7 @@ export function ProcessSection() {
                       animate={{ x: [0, 10, 0] }}
                       transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                     >
-                      <span className="text-2xl">{item.icon}</span>
+                      <span className="text-foreground font-semibold">•</span>
                       <span>{item.label}</span>
                     </motion.div>
                   ))}

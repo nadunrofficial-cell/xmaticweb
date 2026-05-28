@@ -7,13 +7,6 @@ import { Planet } from '@/components/3d/planet'
 
 const services = [
   {
-    icon: Users,
-    title: 'For Artists',
-    description: 'Build your personal brand, grow your fanbase, and monetize your creativity with tailored digital strategies.',
-    color: '#38bdf8',
-    planetColor: '#38bdf8',
-  },
-  {
     icon: Megaphone,
     title: 'For Brands',
     description: 'Dominate your market with data-driven campaigns, compelling content, and AI-enhanced brand positioning.',
@@ -47,6 +40,13 @@ const services = [
     description: 'High-converting websites and digital experiences that turn visitors into loyal customers.',
     color: '#ec4899',
     planetColor: '#a855f7',
+  },
+  {
+    icon: Users,
+    title: 'For Artists',
+    description: 'Build your personal brand, grow your fanbase, and monetize your creativity with tailored digital strategies.',
+    color: '#38bdf8',
+    planetColor: '#38bdf8',
   },
 ]
 

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { PageLoader } from '@/components/page-loader'
 import './globals.css'
 
 const inter = Inter({ 
@@ -39,7 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
       <body className="font-sans antialiased bg-[#070913] text-foreground min-h-screen">
-        {children}
+        <PageLoader>
+          {children}
+        </PageLoader>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

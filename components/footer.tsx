@@ -42,11 +42,11 @@ export function Footer() {
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#38bdf8]" />
-                <span>hello@xmatic.digital</span>
+                <span>hello@xmaticdigital.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#38bdf8]" />
-                <span>+94 77 123 4567</span>
+                <span>+94 76 075 5805</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#38bdf8]" />
