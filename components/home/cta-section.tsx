@@ -109,7 +109,7 @@ export function CTASection() {
                   <Button
                     asChild
                     size="lg"
-                    className="border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10 px-8 py-6 text-lg rounded-full font-semibold"
+                    className="border-[#25D366] text-white bg-[#25D366] hover:bg-[#25D366]/90 px-8 py-6 text-lg rounded-full font-semibold"
                   >
                     <a
                       href="https://wa.me/940760755805?text=Hi%20Xmatic%20Digital!%20I'm%20interested%20in%20your%20services."
