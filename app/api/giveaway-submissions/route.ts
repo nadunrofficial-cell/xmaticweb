@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const data = await request.json()
 
     // Validate required fields
-    const requiredFields = ['fullName', 'businessName', 'email', 'phoneNumber', 'businessType', 'businessGoals', 'budget']
+    const requiredFields = ['fullName', 'businessName', 'email', 'phoneNumber', 'businessType', 'businessGoals']
     for (const field of requiredFields) {
       if (!data[field]) {
         return NextResponse.json(

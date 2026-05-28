@@ -19,7 +19,6 @@ interface Submission {
     businessType: string
     websiteLinks: string
     businessGoals: string
-    budget: string
     additionalNotes: string
   }
 }
@@ -48,7 +47,7 @@ export default function AdminDashboard() {
   const exportToCSV = () => {
     if (submissions.length === 0) return
 
-    const headers = ['ID', 'Timestamp', 'Full Name', 'Business Name', 'Email', 'Phone', 'Business Type', 'Website Links', 'Goals', 'Budget', 'Notes']
+    const headers = ['ID', 'Timestamp', 'Full Name', 'Business Name', 'Email', 'Phone', 'Business Type', 'Website Links', 'Goals', 'Notes']
     const rows = submissions.map((sub) => [
       sub.id,
       sub.timestamp,
@@ -59,7 +58,6 @@ export default function AdminDashboard() {
       sub.data.businessType,
       sub.data.websiteLinks,
       sub.data.businessGoals,
-      sub.data.budget,
       sub.data.additionalNotes,
     ])
 
@@ -190,7 +188,6 @@ export default function AdminDashboard() {
                         { label: 'Phone', value: selectedSubmission.data.phoneNumber },
                         { label: 'Business Type', value: selectedSubmission.data.businessType },
                         { label: 'Website / Social', value: selectedSubmission.data.websiteLinks || 'Not provided' },
-                        { label: 'Budget Range', value: selectedSubmission.data.budget },
                         { label: 'Business Goals', value: selectedSubmission.data.businessGoals, isLarge: true },
                         { label: 'Additional Notes', value: selectedSubmission.data.additionalNotes || 'None', isLarge: true },
                         { 

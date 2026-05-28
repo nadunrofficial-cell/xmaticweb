@@ -14,7 +14,6 @@ interface GiveawayFormData {
   businessType: string
   websiteLinks: string
   businessGoals: string
-  budget: string
   additionalNotes: string
 }
 
@@ -180,33 +179,11 @@ export function GiveawayForm() {
           {errors.businessGoals && <span className="text-red-400 text-sm mt-1">{errors.businessGoals.message}</span>}
         </motion.div>
 
-        {/* Budget */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45 }}
-        >
-          <label className="block text-sm font-medium mb-2 text-foreground">Budget Range *</label>
-          <select
-            {...register('budget', { required: 'Budget range is required' })}
-            className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-[#38bdf8] focus:outline-none transition-colors"
-          >
-            <option value="">Select your budget range</option>
-            <option value="under-5k">Under $5,000</option>
-            <option value="5k-10k">$5,000 - $10,000</option>
-            <option value="10k-25k">$10,000 - $25,000</option>
-            <option value="25k-50k">$25,000 - $50,000</option>
-            <option value="50k-100k">$50,000 - $100,000</option>
-            <option value="above-100k">Above $100,000</option>
-          </select>
-          {errors.budget && <span className="text-red-400 text-sm mt-1">{errors.budget.message}</span>}
-        </motion.div>
-
         {/* Additional Notes */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.45 }}
         >
           <label className="block text-sm font-medium mb-2 text-foreground">Additional Notes / Questions</label>
           <textarea
@@ -221,7 +198,7 @@ export function GiveawayForm() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55 }}
+          transition={{ delay: 0.5 }}
         >
           <Button
             type="submit"
