@@ -114,9 +114,9 @@ export function CelebratingSection() {
             className="mt-12 flex flex-wrap gap-6 justify-center text-sm text-muted-foreground"
           >
             {[
-              { icon: '✨', text: 'Limited Time Offer' },
-              { icon: '🎁', text: 'Exclusive Rewards' },
-              { icon: '🚀', text: 'Grand Prize' },
+              { text: 'Limited Time Offer' },
+              { text: 'Exclusive Rewards' },
+              { text: 'Grand Prize' },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -124,7 +124,6 @@ export function CelebratingSection() {
                 animate={{ y: [0, -3, 0] }}
                 transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
               >
-                <span className="text-lg">{item.icon}</span>
                 <span>{item.text}</span>
               </motion.div>
             ))}
