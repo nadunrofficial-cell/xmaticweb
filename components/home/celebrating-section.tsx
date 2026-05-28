@@ -97,7 +97,7 @@ export function CelebratingSection() {
                 Join Our Giveaway Program
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10, repeat: Infinity, duration: 2 }}
+                  transition={{ duration: 2, repeat: Infinity }}
                 >
                   <ArrowRight className="w-5 h-5" />
                 </motion.span>
