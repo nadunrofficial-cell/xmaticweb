@@ -175,9 +175,9 @@ export function Minimal2DHero() {
             className="flex gap-6 sm:gap-8 pt-4 border-t border-[#38bdf8]/10"
           >
             {[
-              { value: '500+', label: 'Projects Launched' },
-              { value: '150+', label: 'Happy Clients' },
-              { value: '6+', label: 'Years Experience' },
+              { value: '100+', label: 'Projects Launched' },
+              { value: '100+', label: 'Happy Clients' },
+              { value: '5+', label: 'Years Experience' },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-xl sm:text-2xl font-bold text-[#38bdf8]">{stat.value}</span>
