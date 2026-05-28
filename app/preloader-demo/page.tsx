@@ -1,32 +1,45 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Preloader } from '@/components/preloader'
 
-const SlowComponent = dynamic(
-  () => new Promise(resolve => {
-    setTimeout(() => {
-      resolve({ default: () => (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#070913] to-[#0f0920]">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold mb-6 holographic-text">Welcome!</h1>
-            <p className="text-xl text-muted-foreground mb-8">The preloader loaded successfully</p>
+export default function PreloaderDemoPage() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Show preloader for 4 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 4000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <AnimatePresence>
+      {isLoading ? (
+        <div key="preloader" className="fixed inset-0 z-50">
+          <Preloader />
+        </div>
+      ) : (
+        <div key="content" className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#070913] to-[#0f0920]">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <h1 className="text-5xl font-bold mb-6 holographic-text">Preloader Demo</h1>
+            <p className="text-xl text-muted-foreground mb-8">
+              The animated preloader displayed for 4 seconds above!
+            </p>
             <a href="/" className="text-[#38bdf8] hover:text-[#a855f7] underline text-lg">
               Back to Home
             </a>
-          </div>
+          </motion.div>
         </div>
-      )})
-    }, 3000)
-  }),
-  { ssr: false }
-)
-
-export default function PreloaderDemo() {
-  return (
-    <Suspense fallback={<Preloader />}>
-      <SlowComponent />
-    </Suspense>
+      )}
+    </AnimatePresence>
   )
 }
