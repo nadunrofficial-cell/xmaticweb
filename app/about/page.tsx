@@ -69,11 +69,28 @@ export default function AboutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setFormData({ name: "", email: "", phone: "", message: "" })
+    
+    try {
+      // Send contact form to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        setFormData({ name: "", email: "", phone: "", message: "" })
+      } else {
+        console.error('Failed to submit form')
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -289,8 +306,8 @@ export default function AboutPage() {
                         </div>
                         <div>
                           <p className="font-medium">Email</p>
-                          <a href="mailto:hello@xmatic.digital" className="text-muted-foreground hover:text-[#38bdf8] transition-colors">
-                            hello@xmatic.digital
+                          <a href="mailto:hello@xmaticdigital.com" className="text-muted-foreground hover:text-[#38bdf8] transition-colors">
+                            hello@xmaticdigital.com
                           </a>
                         </div>
                       </div>

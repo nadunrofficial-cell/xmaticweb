@@ -36,17 +36,20 @@ export default function AdminDashboard() {
   const [jobs, setJobs] = useState<Job[]>([])
   const [applications, setApplications] = useState<Application[]>([])
   const [giveawaySubmissions, setGiveawaySubmissions] = useState<any[]>([])
+  const [contactSubmissions, setContactSubmissions] = useState<any[]>([])
 
   useEffect(() => {
     setJobs(getJobs())
     setApplications(getApplications())
     fetchGiveawaySubmissions()
+    fetchContactSubmissions()
     
     // Listen for updates
     const handleUpdate = () => {
       setJobs(getJobs())
       setApplications(getApplications())
       fetchGiveawaySubmissions()
+      fetchContactSubmissions()
     }
     window.addEventListener("jobs-updated", handleUpdate)
     window.addEventListener("applications-updated", handleUpdate)
@@ -66,14 +69,33 @@ export default function AdminDashboard() {
     }
   }
 
+  const fetchContactSubmissions = async () => {
+    try {
+      const response = await fetch('/api/contact')
+      const data = await response.json()
+      setContactSubmissions(data)
+    } catch (error) {
+      console.error('Error fetching contact submissions:', error)
+    }
+  }
+
   // Calculate stats
   const totalApplications = applications.length
   const openPositions = jobs.filter(j => j.status === "open").length
   const newApplications = applications.filter(a => a.status === "new").length
   const recentApplications = applications.slice(0, 5)
   const giveawayCount = giveawaySubmissions.length
+  const contactCount = contactSubmissions.length
 
   const stats = [
+    {
+      title: "Contact Messages",
+      value: contactCount.toString(),
+      change: contactCount > 0 ? "New messages received" : "No messages yet",
+      icon: Inbox,
+      color: "#38bdf8",
+      href: "/admin/contact-submissions",
+    },
     {
       title: "Giveaway Submissions",
       value: giveawayCount.toString(),
