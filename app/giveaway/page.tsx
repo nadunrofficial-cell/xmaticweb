@@ -14,7 +14,7 @@ export default function GiveawayPage() {
     <>
       <StarField />
       <Navigation />
-      <main className="relative z-10 min-h-screen py-12 md:py-24">
+      <main className="relative z-10 min-h-screen py-12 md:py-24 pt-24 md:pt-32">
         {/* Background elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <motion.div
