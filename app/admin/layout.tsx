@@ -55,7 +55,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
           <div className="p-6 border-b border-border flex items-center justify-between">
             <Link href="/admin">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0797%20%281%29-99PtpaVD9P33GQVgzmhBGi7ctWvBeK.png"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0798.PNG-jVMgH9KfAcpDFqieo5Gusg1LjXAKId.png"
                 alt="Xmatic Digital"
                 width={160}
                 height={50}
