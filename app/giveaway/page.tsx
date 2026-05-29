@@ -47,10 +47,10 @@ export default function GiveawayPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8"
+            className="mb-8 flex"
           >
-            <Link href="/" className="inline-flex items-center gap-2 text-[#38bdf8] hover:text-[#a855f7] transition-colors">
-              <ArrowLeft className="w-4 h-4" />
+            <Link href="/" className="flex items-center gap-2 text-[#38bdf8] hover:text-[#a855f7] transition-colors text-sm sm:text-base whitespace-nowrap">
+              <ArrowLeft className="w-4 h-4 flex-shrink-0" />
               Back to home
             </Link>
           </motion.div>
