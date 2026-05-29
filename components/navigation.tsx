@@ -45,7 +45,7 @@ export function Navigation() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#38bdf8] to-[#a855f7] group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
-            <Link href="/contact">
+            <Link href="/about#contact">
               <Button className="bg-gradient-to-r from-[#38bdf8] to-[#a855f7] hover:opacity-90 text-white border-0">
                 Contact us
               </Button>
@@ -83,7 +83,7 @@ export function Navigation() {
                   {link.label}
                 </Link>
               ))}
-              <Link href="/contact">
+              <Link href="/about#contact">
                 <Button className="w-full bg-gradient-to-r from-[#38bdf8] to-[#a855f7] hover:opacity-90 text-white border-0 mt-4">
                   Contact us
                 </Button>
