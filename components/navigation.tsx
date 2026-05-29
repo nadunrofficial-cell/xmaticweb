@@ -24,9 +24,9 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="group">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO-0CFgggalbkNFzBEBPQoiNVPQk0Y80t.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0798.PNG-jVMgH9KfAcpDFqieo5Gusg1LjXAKId.png"
               alt="Xmatic Digital"
-              width={50}
+              width={160}
               height={50}
               className="h-14 w-auto group-hover:scale-110 transition-transform"
             />

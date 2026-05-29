@@ -50,9 +50,9 @@ export default function AdminLoginPage() {
       <Card className="w-full max-w-md bg-card/80 backdrop-blur-sm border-border relative z-10">
         <CardHeader className="text-center space-y-4">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO-0CFgggalbkNFzBEBPQoiNVPQk0Y80t.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0798.PNG-jVMgH9KfAcpDFqieo5Gusg1LjXAKId.png"
             alt="Xmatic Digital"
-            width={64}
+            width={200}
             height={64}
             className="mx-auto h-16 w-auto"
           />
