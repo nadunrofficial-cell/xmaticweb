@@ -24,7 +24,7 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="group">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO-0CFgggalbkNFzBEBPQoiNVPQk0Y80t.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0796.PNG-4Cwm2Rmo5ipHNNv1Lxe50ePxSC4yk7.jpeg"
               alt="Xmatic Digital"
               width={50}
               height={50}
