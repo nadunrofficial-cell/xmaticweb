@@ -78,13 +78,13 @@ export function TestimonialsSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                   >
-                    <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 p-2 flex items-center justify-center overflow-hidden hover:border-[#a855f7]/40 transition-colors">
+                    <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden hover:border-[#a855f7]/40 transition-colors flex-shrink-0">
                       <Image
                         src={testimonial.logo}
                         alt={testimonial.company}
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain"
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </motion.div>

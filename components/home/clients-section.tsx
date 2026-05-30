@@ -136,17 +136,17 @@ export function ClientsSection() {
           {duplicatedLogos.map((logo, index) => (
             <motion.div
               key={`${logo.id}-${index}`}
-              className="flex-shrink-0 w-40 h-32 flex items-center justify-center rounded-lg border border-border/30 bg-card/30 backdrop-blur-sm hover:border-[#38bdf8]/50 hover:bg-card/60 transition-all duration-300 cursor-pointer group"
+              className="flex-shrink-0 w-40 h-40 flex items-center justify-center rounded-full border border-border/30 bg-card/30 backdrop-blur-sm hover:border-[#38bdf8]/50 hover:bg-card/60 transition-all duration-300 cursor-pointer group"
               whileHover={{ scale: 1.05, y: -5 }}
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
-              <div className="relative w-full h-full flex items-center justify-center p-4">
+              <div className="relative w-32 h-32 flex items-center justify-center">
                 {/* Grayscale by default, color on hover */}
                 <Image
                   src={logo.logo}
                   alt={logo.name}
                   fill
-                  className="object-contain p-4 grayscale group-hover:grayscale-0 transition-all duration-300"
+                  className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                   sizes="(max-width: 640px) 120px, (max-width: 768px) 140px, 160px"
                 />
               </div>
