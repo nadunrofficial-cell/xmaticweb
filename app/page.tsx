@@ -8,6 +8,7 @@ import { ServicesSection } from "@/components/home/services-section"
 import { ProcessSection } from "@/components/home/process-section"
 import { PortfolioSection } from "@/components/home/portfolio-section"
 import { TestimonialsSection } from "@/components/home/testimonials-section"
+import { ClientsSection } from "@/components/home/clients-section"
 import { CTASection } from "@/components/home/cta-section"
 
 export default function HomePage() {
@@ -22,6 +23,7 @@ export default function HomePage() {
         <ProcessSection />
         <PortfolioSection />
         <TestimonialsSection />
+        <ClientsSection />
         <CTASection />
       </main>
       <Footer />
