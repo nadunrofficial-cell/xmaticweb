@@ -1,27 +1,30 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Star, Quote } from "lucide-react"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "Founder, TechStart Labs",
-    content: "Xmatic Digital transformed our entire digital presence. Their AI-powered approach helped us secure funding and establish ourselves as market leaders in just 6 months.",
-    rating: 5,
+    name: "Nethmi Amarathunga",
+    role: "Managing Director",
+    company: "Japan Lanka Seiyo",
+    content: "X Matic improved our digital marketing in a very structured way. We've seen a clear increase in quality inquiries and stronger online visibility, and we are now recognized and award-winning within our sector as a leading education and visa consultancy brand.",
+    logo: "/clients/japan-lanka.png",
   },
   {
-    name: "Marcus Williams",
-    role: "Artist & Producer",
-    content: "Working with Xmatic was a game-changer for my music career. They understand the creative industry and delivered results that exceeded my expectations.",
-    rating: 5,
+    name: "Ruchira De Silva",
+    role: "Founder & Band Leader",
+    company: "DeSilva Brothers",
+    content: "From day one, X Matic understood our identity perfectly. They enhanced our digital presence without changing our style and helped us connect with music fans more organically.",
+    logo: "/clients/desilva-brothers.png",
   },
   {
-    name: "Elena Rodriguez",
-    role: "CEO, Luxe Fashion Co.",
-    content: "The team at Xmatic combines creativity with data-driven insights perfectly. Our conversion rates doubled within the first quarter of working together.",
-    rating: 5,
+    name: "Rohitha Rukmal",
+    role: "Founder & Owner",
+    company: "MINIMAL",
+    content: "It's not easy to find a marketing team that truly understands minimalist branding. X Matic refined our online presence exactly to match our identity, improving engagement and recognition.",
+    logo: "/clients/minimal.png",
   },
 ]
 
@@ -49,7 +52,7 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -59,76 +62,53 @@ export function TestimonialsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -8 }}
             >
-              <Card className="bg-card/50 border-border/50 h-full hover:border-[#a855f7]/50 transition-all duration-300 group relative overflow-hidden">
+              <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 h-full hover:border-[#a855f7]/40 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm">
                 {/* Animated background accent */}
                 <motion.div
-                  className="absolute top-0 right-0 w-32 h-32 bg-[#a855f7]/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100"
+                  className="absolute top-0 right-0 w-40 h-40 bg-[#a855f7]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100"
                   transition={{ duration: 0.3 }}
                 />
 
-                <CardContent className="p-6 relative z-10">
-                  {/* Quote icon */}
+                <CardContent className="p-8 relative z-10 flex flex-col h-full">
+                  {/* Client logo */}
                   <motion.div
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 10, -10, 0],
-                    }}
-                    transition={{
-                      duration: 3 + index * 0.5,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
+                    className="mb-6 inline-flex"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                   >
-                    <Quote className="w-10 h-10 text-[#a855f7]/40 mb-4" />
+                    <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 p-2 flex items-center justify-center overflow-hidden hover:border-[#a855f7]/40 transition-colors">
+                      <Image
+                        src={testimonial.logo}
+                        alt={testimonial.company}
+                        width={56}
+                        height={56}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   </motion.div>
                   
-                  {/* Content */}
+                  {/* Testimonial content */}
                   <motion.p
-                    className="text-muted-foreground mb-6 leading-relaxed group-hover:text-foreground transition-colors"
+                    className="text-muted-foreground leading-relaxed flex-grow mb-6 group-hover:text-foreground transition-colors text-sm md:text-base"
                     initial={{ opacity: 0.8 }}
                     whileHover={{ opacity: 1 }}
                   >
                     &ldquo;{testimonial.content}&rdquo;
                   </motion.p>
                   
-                  {/* Rating */}
+                  {/* Author info */}
                   <motion.div
-                    className="flex gap-1 mb-4"
+                    className="border-t border-white/10 pt-6"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                   >
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        animate={{
-                          scale: [1, 1.2, 1],
-                        }}
-                        transition={{
-                          duration: 1,
-                          delay: i * 0.1,
-                          repeat: Infinity,
-                        }}
-                      >
-                        <Star className="w-4 h-4 fill-[#38bdf8] text-[#38bdf8]" />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                  
-                  {/* Author */}
-                  <motion.div
-                    className="flex items-center gap-3"
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.div
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#a855f7]"
-                      whileHover={{ scale: 1.1 }}
-                    />
-                    <div>
-                      <p className="font-semibold text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
+                    <p className="font-semibold text-foreground text-sm">{testimonial.name}</p>
+                    <p className="text-xs text-muted-foreground mb-1">{testimonial.role}</p>
+                    <p className="text-xs font-medium text-[#a855f7]/70">{testimonial.company}</p>
                   </motion.div>
                 </CardContent>
               </Card>
