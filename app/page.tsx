@@ -4,6 +4,7 @@ import { WhatsAppCTA } from "@/components/whatsapp-cta"
 import { StarField } from "@/components/star-field"
 import { HeroSection } from "@/components/home/hero-section"
 import { CelebratingSection } from "@/components/home/celebrating-section"
+import { ClientsSection } from "@/components/home/clients-section"
 import { ServicesSection } from "@/components/home/services-section"
 import { ProcessSection } from "@/components/home/process-section"
 import { PortfolioSection } from "@/components/home/portfolio-section"
@@ -18,6 +19,7 @@ export default function HomePage() {
       <main className="relative z-10">
         <HeroSection />
         <CelebratingSection />
+        <ClientsSection />
         <ServicesSection />
         <ProcessSection />
         <PortfolioSection />
