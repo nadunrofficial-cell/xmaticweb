@@ -45,7 +45,9 @@ export function Navigation() {
               </Link>
             ))}
             <Button className="bg-gradient-to-r from-[#38bdf8] to-[#a855f7] hover:opacity-90 text-white border-0">
-              Book a Call
+              <a href="tel:0760755805" className="w-full h-full flex items-center justify-center">
+                Contact Us
+              </a>
             </Button>
           </div>
 
@@ -81,7 +83,9 @@ export function Navigation() {
                 </Link>
               ))}
               <Button className="w-full bg-gradient-to-r from-[#38bdf8] to-[#a855f7] hover:opacity-90 text-white border-0 mt-4">
-                Book a Call
+                <a href="tel:0760755805" className="w-full h-full flex items-center justify-center">
+                  Contact Us
+                </a>
               </Button>
             </div>
           </motion.div>
