@@ -67,47 +67,13 @@ const brands = [
 
 function BrandLogo({ logo, name }: { logo: string; name: string }) {
   return (
-    <motion.div
-      className="flex-shrink-0 h-20 w-28 md:h-24 md:w-32 flex items-center justify-center px-6"
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.3 }}
-    >
+    <div className="flex-shrink-0 h-20 w-28 md:h-24 md:w-32 flex items-center justify-center px-6">
       <img
         src={logo}
         alt={name}
         className="h-full w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
       />
-    </motion.div>
-  )
-}
-
-function MarqueeTrack({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.div
-      className="flex gap-8 md:gap-12"
-      animate={{ x: '-100%' }}
-      transition={{
-        duration: 40,
-        repeat: Infinity,
-        ease: 'linear',
-      }}
-      onHoverStart={(e) => {
-        // Pause animation on hover by stopping the animation
-        if (e.target instanceof HTMLElement) {
-          const parent = e.currentTarget
-          parent.style.animationPlayState = 'paused'
-        }
-      }}
-      onHoverEnd={(e) => {
-        // Resume animation on hover end
-        if (e.target instanceof HTMLElement) {
-          const parent = e.currentTarget
-          parent.style.animationPlayState = 'running'
-        }
-      }}
-    >
-      {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -146,19 +112,46 @@ export function TrustedBrandsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative"
+          className="relative group"
         >
           {/* Gradient overlays for seamless effect */}
           <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          {/* Scrolling container */}
+          {/* Scrolling container with CSS animation */}
           <div className="overflow-hidden">
-            <MarqueeTrack>
+            <style>{`
+              @keyframes marquee {
+                0% {
+                  transform: translateX(0);
+                }
+                100% {
+                  transform: translateX(-100%);
+                }
+              }
+              
+              .marquee-track {
+                display: flex;
+                gap: 2rem;
+                animation: marquee 40s linear infinite;
+                will-change: transform;
+              }
+              
+              @media (min-width: 768px) {
+                .marquee-track {
+                  gap: 3rem;
+                }
+              }
+              
+              .group:hover .marquee-track {
+                animation-play-state: paused;
+              }
+            `}</style>
+            <div className="marquee-track">
               {duplicatedBrands.map((brand, index) => (
                 <BrandLogo key={`${brand.name}-${index}`} logo={brand.logo} name={brand.name} />
               ))}
-            </MarqueeTrack>
+            </div>
           </div>
         </motion.div>
 
