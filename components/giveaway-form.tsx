@@ -15,6 +15,7 @@ interface GiveawayFormData {
   websiteLinks: string
   businessGoals: string
   additionalNotes: string
+  termsAgreed: boolean
 }
 
 export function GiveawayForm() {
@@ -192,6 +193,25 @@ export function GiveawayForm() {
             rows={3}
             className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-[#38bdf8] focus:outline-none transition-colors resize-none"
           />
+        </motion.div>
+
+        {/* Terms Agreement Checkbox */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.475 }}
+          className="flex items-start gap-3"
+        >
+          <input
+            {...register('termsAgreed', { required: 'You must agree to the terms and conditions' })}
+            type="checkbox"
+            id="termsAgreed"
+            className="mt-1 w-4 h-4 rounded border-border bg-background border cursor-pointer focus:border-[#38bdf8] focus:outline-none accent-[#38bdf8]"
+          />
+          <label htmlFor="termsAgreed" className="text-sm text-foreground cursor-pointer">
+            By submitting this form, I agree to the Terms & Conditions of the giveaway.
+          </label>
+          {errors.termsAgreed && <span className="text-red-400 text-sm">{errors.termsAgreed.message}</span>}
         </motion.div>
 
         {/* Submit Button */}

@@ -1,19 +1,40 @@
 import { NextResponse } from 'next/server'
+import { readFile, writeFile } from 'fs/promises'
+import { join } from 'path'
+import { existsSync } from 'fs'
 
-// Simple in-memory storage for submissions
-// In production, this would be a database
-const submissions: Array<{
-  id: string
-  timestamp: string
-  data: any
-}> = []
+const SUBMISSIONS_FILE = join(process.cwd(), '.data', 'giveaway-submissions.json')
+
+async function loadSubmissions() {
+  try {
+    if (existsSync(SUBMISSIONS_FILE)) {
+      const content = await readFile(SUBMISSIONS_FILE, 'utf-8')
+      return JSON.parse(content)
+    }
+  } catch (error) {
+    console.error('Error loading submissions:', error)
+  }
+  return []
+}
+
+async function saveSubmissions(submissions: any[]) {
+  try {
+    const dir = join(process.cwd(), '.data')
+    if (!existsSync(dir)) {
+      await import('fs').then(fs => fs.promises.mkdir(dir, { recursive: true }))
+    }
+    await writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2))
+  } catch (error) {
+    console.error('Error saving submissions:', error)
+  }
+}
 
 export async function POST(request: Request) {
   try {
     const data = await request.json()
 
     // Validate required fields
-    const requiredFields = ['fullName', 'businessName', 'email', 'phoneNumber', 'businessType', 'businessGoals']
+    const requiredFields = ['fullName', 'businessName', 'email', 'phoneNumber', 'businessType', 'businessGoals', 'termsAgreed']
     for (const field of requiredFields) {
       if (!data[field]) {
         return NextResponse.json(
@@ -21,6 +42,14 @@ export async function POST(request: Request) {
           { status: 400 }
         )
       }
+    }
+
+    // Validate termsAgreed
+    if (data.termsAgreed !== true) {
+      return NextResponse.json(
+        { error: 'You must agree to the terms and conditions' },
+        { status: 400 }
+      )
     }
 
     // Basic email validation
@@ -39,11 +68,16 @@ export async function POST(request: Request) {
       data,
     }
 
-    // Store submission
+    // Load existing submissions
+    const submissions = await loadSubmissions()
+
+    // Add new submission
     submissions.push(submission)
 
-    // In production, you would save to database here
-    console.log('New giveaway submission:', submission)
+    // Save to file
+    await saveSubmissions(submissions)
+
+    console.log('New giveaway submission saved:', submission)
 
     return NextResponse.json(
       { 
@@ -64,5 +98,6 @@ export async function POST(request: Request) {
 // GET endpoint to retrieve submissions (for admin)
 export async function GET(request: Request) {
   // In production, add authentication check here
+  const submissions = await loadSubmissions()
   return NextResponse.json(submissions)
 }
