@@ -190,17 +190,17 @@ export default function AdminDashboard() {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ec4899] to-[#a855f7] flex items-center justify-center text-white text-sm font-medium">
-                            {submission.data.fullName.charAt(0)}
+                            {submission.full_name.charAt(0)}
                           </div>
                           <div>
-                            <p className="font-medium">{submission.data.fullName}</p>
-                            <p className="text-sm text-muted-foreground">{submission.data.businessName}</p>
+                            <p className="font-medium">{submission.full_name}</p>
+                            <p className="text-sm text-muted-foreground">{submission.business_name}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span>{submission.data.email}</span>
+                          <span>{submission.email}</span>
                           <span>•</span>
-                          <span>{new Date(submission.timestamp).toLocaleDateString()}</span>
+                          <span>{new Date(submission.created_at).toLocaleDateString()}</span>
                         </div>
                       </div>
                       <Link
