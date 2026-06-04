@@ -25,16 +25,31 @@ import { useState } from "react"
 
 const team = [
   {
-    name: "Ashen Fernando",
-    role: "Co-Founder & Creative Director",
-    bio: "A visionary creative with 8+ years of experience in digital marketing and brand strategy. Ashen leads our creative vision and ensures every project pushes boundaries.",
-    skills: ["Brand Strategy", "Creative Direction", "Content Production"],
+    name: "Ashen Vidusha",
+    role: "Project Manager",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ashen%20vidusha-zGlfnDkw8reKRpHfeNPDtTh6142YlO.png",
+    bio: "A strategic project manager with a passion for delivering excellence. Ashen ensures every project runs smoothly, keeping timelines on track while maintaining our high-quality standards. With expertise in team coordination and client relations, they are the backbone of our operations.",
   },
   {
-    name: "Nadun Perera",
-    role: "Co-Founder & Technical Lead",
-    bio: "A tech innovator passionate about AI and automation. Nadun drives our technical excellence and ensures we stay ahead of the digital curve.",
-    skills: ["AI Integration", "Web Development", "Digital Strategy"],
+    name: "Nadun Alahakoon",
+    role: "Creative Director",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nadun%20alahakoon-iv1nv1k59CRVxZpzwpFZdDGjCVQ066.png",
+    bio: "A visionary creative director with an eye for innovation and design. Nadun leads our creative initiatives, crafting compelling brand stories and experiences that resonate with audiences. With a background in design and digital strategy, they push boundaries and inspire our team daily.",
+  },
+]
+
+const supportingTeam = [
+  {
+    name: "Chathura Wickramasinghe",
+    role: "Videographer / Content Creator",
+  },
+  {
+    name: "Tharushi Jayawardena",
+    role: "Digital Marketing Specialist",
+  },
+  {
+    name: "Buddika Edirisinghe",
+    role: "Full Stack Developer",
   },
 ]
 
@@ -197,17 +212,18 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Meet the <span className="gradient-text">Team</span>
+                MEET OUR <span className="gradient-text">TEAM</span>
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                The passionate individuals behind Xmatic Digital&apos;s success.
+                The brilliant minds behind Xmatic Digital&apos;s success.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Featured Team Members */}
+            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto mb-16">
               {team.map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -215,40 +231,76 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="flex flex-col items-center text-center"
                 >
-                  <Card className="bg-card/50 border-border/50 overflow-hidden">
-                    <div className="h-3 bg-gradient-to-r from-[#38bdf8] to-[#a855f7]" />
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#a855f7] shrink-0" />
-                        <div>
-                          <h3 className="text-xl font-bold">{member.name}</h3>
-                          <p className="text-[#38bdf8] text-sm">{member.role}</p>
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground mb-4">{member.bio}</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {member.skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-3 py-1 text-xs rounded-full bg-[#38bdf8]/10 text-[#38bdf8]"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex gap-3">
-                        <a href="#" className="text-muted-foreground hover:text-[#38bdf8] transition-colors">
-                          <Linkedin className="w-5 h-5" />
-                        </a>
-                        <a href="#" className="text-muted-foreground hover:text-[#38bdf8] transition-colors">
-                          <Twitter className="w-5 h-5" />
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Circular Image */}
+                  <motion.div
+                    className="mb-8"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-[#a855f7]/30 shadow-lg hover:border-[#a855f7]/50 transition-colors"
+                    />
+                  </motion.div>
+
+                  {/* Info */}
+                  <motion.div whileHover={{ y: -4 }} className="flex-1">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2">{member.name}</h3>
+                    <p className="text-[#a855f7] font-medium text-lg mb-6">{member.role}</p>
+                    <p className="text-muted-foreground leading-relaxed text-base">{member.bio}</p>
+                    
+                    {/* Accent line */}
+                    <div className="h-1 w-12 bg-gradient-to-r from-[#38bdf8] to-[#a855f7] rounded-full mx-auto mt-6" />
+                  </motion.div>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Supporting Team Members */}
+            <div className="border-t border-border/30 pt-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h3 className="text-2xl md:text-3xl font-bold mb-2">Our Talented Support Team</h3>
+              </motion.div>
+
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {supportingTeam.map((member, index) => (
+                  <motion.div
+                    key={member.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <Card className="bg-card/30 border-border/30 h-full hover:border-[#a855f7]/40 transition-all duration-300 group overflow-hidden">
+                      <CardContent className="p-6 relative">
+                        {/* Animated background accent */}
+                        <motion.div
+                          className="absolute top-0 right-0 w-24 h-24 bg-[#a855f7]/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100"
+                          transition={{ duration: 0.3 }}
+                        />
+                        
+                        {/* Content */}
+                        <div className="relative z-10">
+                          <div className="flex items-center justify-center mb-4">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#38bdf8]/20 to-[#a855f7]/20" />
+                          </div>
+                          <h4 className="text-lg font-bold text-center mb-2">{member.name}</h4>
+                          <p className="text-sm text-[#a855f7] text-center font-medium">{member.role}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
