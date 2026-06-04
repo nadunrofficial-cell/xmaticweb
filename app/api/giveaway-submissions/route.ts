@@ -1,33 +1,9 @@
 import { NextResponse } from 'next/server'
-import { readFile, writeFile } from 'fs/promises'
-import { join } from 'path'
-import { existsSync } from 'fs'
+import { Pool } from 'pg'
 
-const SUBMISSIONS_FILE = join(process.cwd(), '.data', 'giveaway-submissions.json')
-
-async function loadSubmissions() {
-  try {
-    if (existsSync(SUBMISSIONS_FILE)) {
-      const content = await readFile(SUBMISSIONS_FILE, 'utf-8')
-      return JSON.parse(content)
-    }
-  } catch (error) {
-    console.error('Error loading submissions:', error)
-  }
-  return []
-}
-
-async function saveSubmissions(submissions: any[]) {
-  try {
-    const dir = join(process.cwd(), '.data')
-    if (!existsSync(dir)) {
-      await import('fs').then(fs => fs.promises.mkdir(dir, { recursive: true }))
-    }
-    await writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2))
-  } catch (error) {
-    console.error('Error saving submissions:', error)
-  }
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+})
 
 export async function POST(request: Request) {
   try {
@@ -61,23 +37,28 @@ export async function POST(request: Request) {
       )
     }
 
-    // Create submission object
-    const submission = {
-      id: `submission-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      timestamp: new Date().toISOString(),
-      data,
-    }
+    // Insert into database
+    const result = await pool.query(
+      `INSERT INTO giveaway_submissions 
+        (full_name, business_name, email, phone_number, business_type, website_links, business_goals, additional_notes, terms_agreed)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+       RETURNING id, created_at`,
+      [
+        data.fullName,
+        data.businessName,
+        data.email,
+        data.phoneNumber,
+        data.businessType,
+        data.websiteLinks || '',
+        data.businessGoals,
+        data.additionalNotes || '',
+        data.termsAgreed,
+      ]
+    )
 
-    // Load existing submissions
-    const submissions = await loadSubmissions()
+    const submission = result.rows[0]
 
-    // Add new submission
-    submissions.push(submission)
-
-    // Save to file
-    await saveSubmissions(submissions)
-
-    console.log('New giveaway submission saved:', submission)
+    console.log('New giveaway submission saved:', submission.id)
 
     return NextResponse.json(
       { 
@@ -97,7 +78,17 @@ export async function POST(request: Request) {
 
 // GET endpoint to retrieve submissions (for admin)
 export async function GET(request: Request) {
-  // In production, add authentication check here
-  const submissions = await loadSubmissions()
-  return NextResponse.json(submissions)
+  try {
+    // In production, add authentication check here
+    const result = await pool.query(
+      'SELECT * FROM giveaway_submissions ORDER BY created_at DESC'
+    )
+    return NextResponse.json(result.rows)
+  } catch (error) {
+    console.error('Error fetching submissions:', error)
+    return NextResponse.json(
+      { error: 'Failed to fetch submissions' },
+      { status: 500 }
+    )
+  }
 }

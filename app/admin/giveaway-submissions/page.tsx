@@ -10,17 +10,17 @@ import Link from 'next/link'
 
 interface Submission {
   id: string
-  timestamp: string
-  data: {
-    fullName: string
-    businessName: string
-    email: string
-    phoneNumber: string
-    businessType: string
-    websiteLinks: string
-    businessGoals: string
-    additionalNotes: string
-  }
+  full_name: string
+  business_name: string
+  email: string
+  phone_number: string
+  business_type: string
+  website_links: string
+  business_goals: string
+  additional_notes: string
+  terms_agreed: boolean
+  created_at: string
+  updated_at: string
 }
 
 export default function AdminDashboard() {
@@ -47,18 +47,19 @@ export default function AdminDashboard() {
   const exportToCSV = () => {
     if (submissions.length === 0) return
 
-    const headers = ['ID', 'Timestamp', 'Full Name', 'Business Name', 'Email', 'Phone', 'Business Type', 'Website Links', 'Goals', 'Notes']
+    const headers = ['ID', 'Full Name', 'Business Name', 'Email', 'Phone', 'Business Type', 'Website Links', 'Goals', 'Notes', 'Terms Agreed', 'Submitted']
     const rows = submissions.map((sub) => [
       sub.id,
-      sub.timestamp,
-      sub.data.fullName,
-      sub.data.businessName,
-      sub.data.email,
-      sub.data.phoneNumber,
-      sub.data.businessType,
-      sub.data.websiteLinks,
-      sub.data.businessGoals,
-      sub.data.additionalNotes,
+      sub.full_name,
+      sub.business_name,
+      sub.email,
+      sub.phone_number,
+      sub.business_type,
+      sub.website_links,
+      sub.business_goals,
+      sub.additional_notes,
+      sub.terms_agreed ? 'Yes' : 'No',
+      new Date(sub.created_at).toLocaleString(),
     ])
 
     const csvContent = [
@@ -150,10 +151,10 @@ export default function AdminDashboard() {
                           selectedSubmission?.id === submission.id ? 'bg-foreground/10 border-l-2 border-[#38bdf8]' : ''
                         }`}
                       >
-                        <p className="font-semibold text-foreground truncate">{submission.data.fullName}</p>
-                        <p className="text-sm text-muted-foreground truncate">{submission.data.email}</p>
+                        <p className="font-semibold text-foreground truncate">{submission.full_name}</p>
+                        <p className="text-sm text-muted-foreground truncate">{submission.email}</p>
                         <p className="text-xs text-muted-foreground mt-1">
-                          {new Date(submission.timestamp).toLocaleDateString()}
+                          {new Date(submission.created_at).toLocaleDateString()}
                         </p>
                       </motion.button>
                     ))}
@@ -171,8 +172,8 @@ export default function AdminDashboard() {
                   <div className="glass-premium rounded-lg p-8">
                     <div className="flex items-start justify-between mb-6">
                       <div>
-                        <h2 className="text-2xl font-bold text-foreground mb-2">{selectedSubmission.data.fullName}</h2>
-                        <p className="text-muted-foreground">{selectedSubmission.data.businessName}</p>
+                        <h2 className="text-2xl font-bold text-foreground mb-2">{selectedSubmission.full_name}</h2>
+                        <p className="text-muted-foreground">{selectedSubmission.business_name}</p>
                       </div>
                       <button
                         className="p-2 hover:bg-foreground/10 rounded-lg transition-colors"
@@ -184,15 +185,19 @@ export default function AdminDashboard() {
 
                     <div className="space-y-6">
                       {[
-                        { label: 'Email', value: selectedSubmission.data.email },
-                        { label: 'Phone', value: selectedSubmission.data.phoneNumber },
-                        { label: 'Business Type', value: selectedSubmission.data.businessType },
-                        { label: 'Website / Social', value: selectedSubmission.data.websiteLinks || 'Not provided' },
-                        { label: 'Business Goals', value: selectedSubmission.data.businessGoals, isLarge: true },
-                        { label: 'Additional Notes', value: selectedSubmission.data.additionalNotes || 'None', isLarge: true },
+                        { label: 'Email', value: selectedSubmission.email },
+                        { label: 'Phone', value: selectedSubmission.phone_number },
+                        { label: 'Business Type', value: selectedSubmission.business_type },
+                        { label: 'Website / Social', value: selectedSubmission.website_links || 'Not provided' },
+                        { label: 'Business Goals', value: selectedSubmission.business_goals, isLarge: true },
+                        { label: 'Additional Notes', value: selectedSubmission.additional_notes || 'None', isLarge: true },
+                        { 
+                          label: 'Terms Agreed', 
+                          value: selectedSubmission.terms_agreed ? 'Yes' : 'No',
+                        },
                         { 
                           label: 'Submitted', 
-                          value: new Date(selectedSubmission.timestamp).toLocaleString(),
+                          value: new Date(selectedSubmission.created_at).toLocaleString(),
                         },
                       ].map((item, i) => (
                         <div key={i}>
