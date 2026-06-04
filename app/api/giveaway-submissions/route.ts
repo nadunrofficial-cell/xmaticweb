@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server'
 import { Pool } from 'pg'
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-})
+let pool: Pool
+
+function getPool() {
+  if (!pool) {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    })
+  }
+  return pool
+}
 
 export async function POST(request: Request) {
   try {
@@ -37,6 +44,8 @@ export async function POST(request: Request) {
       )
     }
 
+    const pool = getPool()
+
     // Insert into database
     const result = await pool.query(
       `INSERT INTO giveaway_submissions 
@@ -58,7 +67,7 @@ export async function POST(request: Request) {
 
     const submission = result.rows[0]
 
-    console.log('New giveaway submission saved:', submission.id)
+    console.log('[v0] New giveaway submission saved:', submission.id)
 
     return NextResponse.json(
       { 
@@ -68,9 +77,9 @@ export async function POST(request: Request) {
       { status: 201 }
     )
   } catch (error) {
-    console.error('Error processing submission:', error)
+    console.error('[v0] Error processing submission:', error)
     return NextResponse.json(
-      { error: 'Failed to process submission' },
+      { error: 'Failed to process submission', details: String(error) },
       { status: 500 }
     )
   }
@@ -80,14 +89,15 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     // In production, add authentication check here
+    const pool = getPool()
     const result = await pool.query(
       'SELECT * FROM giveaway_submissions ORDER BY created_at DESC'
     )
     return NextResponse.json(result.rows)
   } catch (error) {
-    console.error('Error fetching submissions:', error)
+    console.error('[v0] Error fetching submissions:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch submissions' },
+      { error: 'Failed to fetch submissions', details: String(error) },
       { status: 500 }
     )
   }
