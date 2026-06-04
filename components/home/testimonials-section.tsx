@@ -6,21 +6,27 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "Founder, TechStart Labs",
-    content: "Xmatic Digital transformed our entire digital presence. Their AI-powered approach helped us secure funding and establish ourselves as market leaders in just 6 months.",
+    name: "Nethmi Amarathunga",
+    role: "Managing Director",
+    company: "Japan Lanka Seiyo",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/japan%20lanka-33IIMFjxo8saYXIKxrtQLRY8I6WC6P.png",
+    content: "X Matic improved our digital marketing in a very structured way. We've seen a clear increase in quality inquiries and stronger online visibility, and we are now recognized and award-winning within our sector as a leading education and visa consultancy brand.",
     rating: 5,
   },
   {
-    name: "Marcus Williams",
-    role: "Artist & Producer",
-    content: "Working with Xmatic was a game-changer for my music career. They understand the creative industry and delivered results that exceeded my expectations.",
+    name: "Ruchira De Silva",
+    role: "Founder & Band Leader",
+    company: "DeSilva Brothers",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/desilva%20brothers-q4PdEesxhbAa2kYLww2Su7EbNvD33q.png",
+    content: "From day one, X Matic understood our identity perfectly. They enhanced our digital presence without changing our style and helped us connect with music fans more organically.",
     rating: 5,
   },
   {
-    name: "Elena Rodriguez",
-    role: "CEO, Luxe Fashion Co.",
-    content: "The team at Xmatic combines creativity with data-driven insights perfectly. Our conversion rates doubled within the first quarter of working together.",
+    name: "Rohitha Rukmal",
+    role: "Founder & Owner",
+    company: "MINIMAL",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/minimal-ne6ZN057JL8xeJDZaTTXqw5vSeh7ht.png",
+    content: "It's not easy to find a marketing team that truly understands minimalist branding. X Matic refined our online presence exactly to match our identity, improving engagement and recognition.",
     rating: 5,
   },
 ]
@@ -49,7 +55,7 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -59,14 +65,27 @@ export function TestimonialsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -8 }}
             >
-              <Card className="bg-card/50 border-border/50 h-full hover:border-[#a855f7]/50 transition-all duration-300 group relative overflow-hidden">
+              <Card className="bg-card/40 border-border/30 h-full hover:border-[#a855f7]/40 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm">
                 {/* Animated background accent */}
                 <motion.div
                   className="absolute top-0 right-0 w-32 h-32 bg-[#a855f7]/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100"
                   transition={{ duration: 0.3 }}
                 />
 
-                <CardContent className="p-6 relative z-10">
+                <CardContent className="p-8 relative z-10 flex flex-col h-full">
+                  {/* Client Logo - Circular */}
+                  <motion.div
+                    className="mb-6 flex-shrink-0"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img
+                      src={testimonial.logo}
+                      alt={testimonial.company}
+                      className="w-20 h-20 rounded-full object-cover border-2 border-[#a855f7]/20 shadow-lg"
+                    />
+                  </motion.div>
+
                   {/* Quote icon */}
                   <motion.div
                     animate={{
@@ -79,18 +98,21 @@ export function TestimonialsSection() {
                       ease: 'easeInOut',
                     }}
                   >
-                    <Quote className="w-10 h-10 text-[#a855f7]/40 mb-4" />
+                    <Quote className="w-8 h-8 text-[#a855f7]/30 mb-4" />
                   </motion.div>
-                  
+
                   {/* Content */}
                   <motion.p
-                    className="text-muted-foreground mb-6 leading-relaxed group-hover:text-foreground transition-colors"
-                    initial={{ opacity: 0.8 }}
+                    className="text-muted-foreground mb-6 leading-relaxed group-hover:text-foreground transition-colors text-sm md:text-base flex-grow"
+                    initial={{ opacity: 0.9 }}
                     whileHover={{ opacity: 1 }}
                   >
                     &ldquo;{testimonial.content}&rdquo;
                   </motion.p>
-                  
+
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-[#a855f7]/20 to-transparent mb-5" />
+
                   {/* Rating */}
                   <motion.div
                     className="flex gap-1 mb-4"
@@ -111,24 +133,16 @@ export function TestimonialsSection() {
                           repeat: Infinity,
                         }}
                       >
-                        <Star className="w-4 h-4 fill-[#38bdf8] text-[#38bdf8]" />
+                        <Star className="w-4 h-4 fill-[#a855f7] text-[#a855f7]" />
                       </motion.div>
                     ))}
                   </motion.div>
-                  
-                  {/* Author */}
-                  <motion.div
-                    className="flex items-center gap-3"
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.div
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#a855f7]"
-                      whileHover={{ scale: 1.1 }}
-                    />
-                    <div>
-                      <p className="font-semibold text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
+
+                  {/* Author Info */}
+                  <motion.div whileHover={{ x: 2 }} className="mt-auto">
+                    <p className="font-semibold text-foreground text-sm md:text-base">{testimonial.name}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="text-xs text-[#a855f7]/70 font-medium mt-1">{testimonial.company}</p>
                   </motion.div>
                 </CardContent>
               </Card>
